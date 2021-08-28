@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int leftDiceNo = 2;
+  int rightDiceNo = 3;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,14 +39,14 @@ class MyApp extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width:130.0,
+                width: 130.0,
                 height: 25.0,
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Divider(
                     height: 5.0,
-                    thickness:5.0,
-                    color:Colors.white70,
+                    thickness: 5.0,
+                    color: Colors.white70,
                   ),
                 ),
               ),
@@ -44,18 +54,34 @@ class MyApp extends StatelessWidget {
                 Expanded(
                   child: FlatButton(
                       onPressed: () {
-                        print('Button got pressed');
+                        setState(() {
+                          leftDiceNo = Random().nextInt(6) + 1;
+                        });
                       },
-                      child: Image.asset('images/dice1.png')),
+                      child: Image.asset('images/dice$leftDiceNo.png')),
                 ),
                 Expanded(
                   child: FlatButton(
                       onPressed: () {
-                        print('Button 2 got pressed');
+                        setState(() {
+                          rightDiceNo = Random().nextInt(6) + 1;
+                        });
                       },
-                      child: Image.asset('images/dice2.png')),
+                      child: Image.asset('images/dice$rightDiceNo.png')),
                 ),
-              ])
+              ]),
+              Container(
+                child:Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    'Click the images to play 😉😉',
+                    style:TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
+              ),
             ]),
       ),
     );
