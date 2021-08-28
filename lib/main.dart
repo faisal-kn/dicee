@@ -15,6 +15,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int leftDiceNo = 2;
   int rightDiceNo = 3;
+
+  void ChangeDiceNo(){
+    setState(() {
+      leftDiceNo = Random().nextInt(6) + 1;
+      rightDiceNo = Random().nextInt(6) + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,9 +62,7 @@ class _MyAppState extends State<MyApp> {
                 Expanded(
                   child: FlatButton(
                       onPressed: () {
-                        setState(() {
-                          leftDiceNo = Random().nextInt(6) + 1;
-                        });
+                        ChangeDiceNo();
                       },
                       child: Image.asset('images/dice$leftDiceNo.png')),
                 ),
@@ -64,7 +70,7 @@ class _MyAppState extends State<MyApp> {
                   child: FlatButton(
                       onPressed: () {
                         setState(() {
-                          rightDiceNo = Random().nextInt(6) + 1;
+                          ChangeDiceNo();
                         });
                       },
                       child: Image.asset('images/dice$rightDiceNo.png')),
@@ -74,7 +80,7 @@ class _MyAppState extends State<MyApp> {
                 child:Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Text(
-                    'Click the images to play 😉😉',
+                    'Click the dice to play 😉😉',
                     style:TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 20.0,
